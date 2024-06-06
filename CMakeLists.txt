@@ -64,3 +64,10 @@ do_test(Test 0.0        "is 0")
 do_test(Test -0.0       "is 0")
 do_test(Test -25        "is [-nan|nan|0]")
 do_test(Test 0.0001     "is 0.01")
+
+# 安装程序
+include(InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
+set(CPACK_PACKAGE_VERSION_MAJOR "${Test_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${Test_VERSION_MINOR}")
+include(CPack)

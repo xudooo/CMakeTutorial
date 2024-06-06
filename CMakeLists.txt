@@ -17,7 +17,6 @@ configure_file(config.h.in config.h)
 if(USE_MYMATH)
     add_subdirectory(MathFunctions)
     list(APPEND EXTRA_LIBS MathFunctions)
-    list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/MathFunctions")
 endif()
 
 # 添加可执行文件
@@ -29,5 +28,4 @@ target_link_libraries(Test PUBLIC ${EXTRA_LIBS})
 # 这样我们就可以找到 config.h
 target_include_directories(Test PUBLIC
                            "${PROJECT_BINARY_DIR}"
-                           ${EXTRA_INCLUDES}
                            )

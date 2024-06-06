@@ -29,3 +29,9 @@ target_link_libraries(Test PUBLIC ${EXTRA_LIBS})
 target_include_directories(Test PUBLIC
                            "${PROJECT_BINARY_DIR}"
                            )
+
+# 添加安装目标
+install(TARGETS Test DESTINATION bin)
+install(FILES "${PROJECT_BINARY_DIR}/config.h"
+        DESTINATION include
+        )

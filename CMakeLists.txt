@@ -37,7 +37,7 @@ install(FILES "${PROJECT_BINARY_DIR}/config.h"
         )
 
 # 启用测试
-enable_testing()
+include(CTest)
 
 # 应用程序是否运行
 add_test(NAME Runs COMMAND Test 25)

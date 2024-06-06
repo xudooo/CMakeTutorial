@@ -24,3 +24,10 @@ cpack -G ZIP -C Debug   # -G 指定生成器，-C 指定配置
 cpack --config CPackSourceConfig.cmake  # 创建分发源
 make package    # 创建分发源s
 ```
+
+第8步，添加对dashboard的支持
+[地址](https://my.cdash.org/index.php?project=CMakeTutorial&date=2024-06-05)
+
+```shell
+ctest [-VV] -D Experimental
+```

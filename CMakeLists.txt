@@ -35,3 +35,32 @@ install(TARGETS Test DESTINATION bin)
 install(FILES "${PROJECT_BINARY_DIR}/config.h"
         DESTINATION include
         )
+
+# 启用测试
+enable_testing()
+
+# 应用程序是否运行
+add_test(NAME Runs COMMAND Test 25)
+
+# 使用消息是否有效
+add_test(NAME Usage COMMAND Test)
+set_tests_properties(Usage
+        PROPERTIES PASS_REGULAR_EXPRESSION "Usage:.*number"
+        )
+
+# 定义一个程序以简化添加测试
+function(do_test target arg result)
+    add_test(NAME Comp${arg} COMMAND ${target} ${arg})
+    set_tests_properties(Comp${arg}
+        PROPERTIES PASS_REGULAR_EXPRESSION ${result}
+        )
+endfunction(do_test)
+
+# 做一些基于结果的测试
+do_test(Test 4          "is 2")
+do_test(Test 9          "is 3")
+do_test(Test 5          "is 2.236")
+do_test(Test 0.0        "is 0")
+do_test(Test -0.0       "is 0")
+do_test(Test -25        "is [-nan|nan|0]")
+do_test(Test 0.0001     "is 0.01")

@@ -4,10 +4,7 @@
 #include <string>
 
 #include "config.h"
-
-#ifdef USE_MYMATH
 #include "MathFunctions.h"
-#endif // USE_MYMATH
 
 int main(int argc, char* argv[])
 {
@@ -22,14 +19,8 @@ int main(int argc, char* argv[])
   // convert input to double
   const double inputValue = std::stod(argv[1]); //c++11
 
-  // calculate square root
-#ifdef USE_MYMATH
-  const double outputValue = mysqrt(inputValue);
-  std::cout << "use mysqrt" << std::endl;
-#else
-  const double outputValue = std::sqrt(inputValue);
-  std::cout << "use std::sqrt" << std::endl;
-#endif
+  const double outputValue = mathfunctions::sqrt(inputValue);
+
   std::cout << "The square root of " << inputValue << " is " << outputValue
             << std::endl;
   return 0;

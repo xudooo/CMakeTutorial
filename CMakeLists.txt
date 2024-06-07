@@ -7,22 +7,24 @@ project(Test VERSION 1.0)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# 添加配置项，是否需要自己的数学库
-option(USE_MYMATH "Use my math implementation" ON)
+# 控制静态库和共享库的构建位置，无需修改运行可执行文件的位置
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
 
-# 配置头文件以将某些 CMake 设置传递给源代码
+option(BUILD_SHARED_LIBS "BuildUse my math implementation" ON)
+
+# 配置头文件，仅传递版本号给源代码
 configure_file(config.h.in config.h)
 
 # 添加MathFunctions库
-if(USE_MYMATH)
-    add_subdirectory(MathFunctions)
-    list(APPEND EXTRA_LIBS MathFunctions)
-endif()
+add_subdirectory(MathFunctions)
 
 # 添加可执行文件
 add_executable(Test test.cpp)
 
-target_link_libraries(Test PUBLIC ${EXTRA_LIBS})
+# 链接MathFunctions库
+target_link_libraries(Test PUBLIC MathFunctions)
 
 # 将二叉树添加到包含文件的搜索路径
 # 这样我们就可以找到 config.h

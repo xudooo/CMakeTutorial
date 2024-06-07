@@ -5,6 +5,8 @@
 // include the generated table
 #include "Table.h"
 
+namespace mathfunctions {
+namespace detail {
 // 使用简单操作进行hack平方根计算
 double mysqrt(double x)
 {
@@ -31,4 +33,6 @@ double mysqrt(double x)
   }
 
   return result;
+}
+}
 }
